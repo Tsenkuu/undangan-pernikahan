@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <base href="/">
+  <title>The Wedding of Arbian &amp; Hima</title>
+  
+  <!-- Open Graph / Meta Preview for WhatsApp & Social Media -->
+  <meta property="og:title" content="The Wedding of Arbian &amp; Hima - 29 November 2026">
+  <meta property="og:description" content="Kepada Yth. Bapak/Ibu/Saudara/i, buka undangan untuk melihat detail acara pernikahan Arbian &amp; Hima.">
+  <meta property="og:image" content="/assets/images/couple-1.jpg">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#4d151c">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="/assets/images/bride-avatar.jpg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="locked">
+
+  <!-- Ambient Golden Sparkles & Melati Petals Canvas -->
+  <canvas id="particleCanvas" class="particle-canvas"></canvas>
+  <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+  <!-- ==========================================================================
+       SCREEN 1: THE OPENING COVER / LOCK SCREEN OVERLAY WITH 3D ENVELOPE
+       ========================================================================== -->
+  <div class="cover-overlay" id="coverOverlay">
+    <div class="pattern-bg"></div>
+
+    <!-- 3D ROYAL WEDDING ENVELOPE -->
+    <div class="envelope-scene" id="envelopeScene">
+      <div class="envelope-wrapper" id="envelopeWrapper">
+
+        <!-- 3D Top Flap with Royal Wax Seal -->
+        <div class="envelope-flap" id="envelopeFlap">
+          <div class="wax-seal" id="waxSeal">
+            <span class="wax-seal-initials">A &amp; H</span>
+          </div>
+        </div>
+
+        <!-- The Invitation Card that emerges from the envelope -->
+        <div class="cover-container envelope-card" id="envelopeCard">
+          
+          <!-- Javanese Gunungan Emblem SVG -->
+          <svg class="cover-gunungan" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 5C45 20 30 35 20 50C10 65 5 80 8 100C10 110 25 115 50 115C75 115 90 110 92 100C95 80 90 65 80 50C70 35 55 20 50 5Z" stroke="#d4af37" stroke-width="2.5" fill="rgba(212, 175, 55, 0.12)"/>
+            <path d="M50 15C47 28 35 40 28 52C20 64 16 75 18 90C20 100 32 105 50 105C68 105 80 100 82 90C84 75 80 64 72 52C65 40 53 28 50 15Z" stroke="#f7e7b4" stroke-width="1.2" stroke-dasharray="2 2"/>
+            <path d="M50 25V105M35 55C40 65 60 65 65 55M30 75C40 85 60 85 70 75M25 95C35 105 65 105 75 95" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="50" cy="18" r="3" fill="#f7e7b4"/>
+            <circle cx="50" cy="55" r="2.5" fill="#f7e7b4"/>
+          </svg>
+
+          <div class="cover-tagline">Walimatul 'Ursy</div>
+          <h1 class="cover-names shimmer-gold-text">Arbian &amp; Hima</h1>
+
+          <!-- Arch Couple Portrait Frame -->
+          <div class="cover-arch-wrapper">
+            <img src="assets/images/couple-jawa-1.jpg" alt="Mohamad Arbian Surya &amp; Himmatul Qoyyimah" class="cover-arch-img">
+          </div>
+
+          <!-- Guest Greeting Card with URL Param Parser -->
+          <div class="cover-guest-card">
+            <div class="cover-guest-label">Kepada Yth. Bapak/Ibu/Saudara/i:</div>
+            <div class="cover-guest-name" id="guestName">Tamu Undangan</div>
+            <div class="cover-guest-note">Mohon maaf apabila ada kesalahan penulisan nama atau gelar</div>
+          </div>
+
+          <!-- Open Invitation Button -->
+          <button class="btn-open-invitation" id="btnOpen">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+            Buka Undangan
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Music Audio Element -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="assets/audio/song.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- ==========================================================================
+       MAIN INVITATION CONTENT WRAPPER
+       ========================================================================== -->
+  <div class="invitation-wrapper" id="invitationContent">
+
+    <!-- Pattern Background -->
+    <div class="pattern-bg"></div>
+
+    <!-- 1. HERO SECTION -->
+    <header class="hero-section section-dark" id="hero">
+      
+      <!-- Top Gunungan Motif -->
+      <svg class="hero-gunungan-top reveal-zoom" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5C45 20 30 35 20 50C10 65 5 80 8 100C10 110 25 115 50 115C75 115 90 110 92 100C95 80 90 65 80 50C70 35 55 20 50 5Z" stroke="#d4af37" stroke-width="2.5" fill="rgba(212, 175, 55, 0.12)"/>
+        <path d="M50 25V105M35 55C40 65 60 65 65 55M30 75C40 85 60 85 70 75" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="50" cy="18" r="3" fill="#f7e7b4"/>
+      </svg>
+
+      <div class="hero-greeting reveal-up">THE WEDDING OF</div>
+      <h1 class="hero-couple-names reveal-up">Arbian &amp; Hima</h1>
+
+      <!-- Main Portrait Arch Frame -->
+      <div class="hero-portrait-frame reveal-zoom">
+        <img src="assets/images/couple-1.jpg" alt="Arbian &amp; Hima Wedding" class="hero-portrait-img">
+      </div>
+
+      <div class="hero-date-badge reveal-up">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        Minggu, 29 November 2026
+      </div>
+
+      <!-- Live Countdown Timer -->
+      <div class="countdown-box reveal-up">
+        <div class="countdown-item">
+          <span class="countdown-number" id="countDays">00</span>
+          <span class="countdown-label">Hari</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="countHours">00</span>
+          <span class="countdown-label">Jam</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="countMinutes">00</span>
+          <span class="countdown-label">Menit</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="countSeconds">00</span>
+          <span class="countdown-label">Detik</span>
+        </div>
+      </div>
+
+      <!-- Add to Google Calendar Button -->
+      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+Arbian+%26+Hima&dates=20261129T010000Z%2F20261129T080000Z&details=Pernikahan+Mohamad+Arbian+Surya+%26+Himmatul+Qoyyimah.+Lokasi:+Ds+Pulerejo,+Kec+Ngantru,+Kab+Tulungagung&location=Ds+Pulerejo,+Kec+Ngantru,+Kab+Tulungagung" target="_blank" rel="noopener noreferrer" class="btn-calendar reveal-up">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        Simpan di Kalender
+      </a>
+
+    </header>
+
+    <!-- 2. QURANIC BLESSING & SALAM SECTION -->
+    <section class="section-cream" id="doa">
+      <div class="quote-card reveal-up">
+        <div class="arabic-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+        
+        <p class="arabic-verse">
+          وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ
+        </p>
+
+        <p class="quote-translation">
+          “Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berfikir.”
+        </p>
+
+        <div class="quote-reference">Q.S. Ar-Rum : 21</div>
+      </div>
+    </section>
+
+    <!-- 3. MEMPELAI (THE COUPLE) SECTION -->
+    <section class="section-cream" id="mempelai" style="padding-top: 20px;">
+      
+      <div class="section-subtitle reveal-up">Pasangan Mempelai</div>
+      <h2 class="section-title reveal-up">Mempelai Berbahagia</h2>
+      <div class="section-divider reveal-up">
+        <svg class="divider-icon" viewBox="0 0 24 24">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </div>
+
+      <p class="couple-intro-text reveal-up">
+        Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Dengan memohon ridho dan rahmat Allah SWT, kami bermaksud menyelenggarakan pernikahan kami:
+      </p>
+
+      <!-- GROOM CARD -->
+      <div class="profile-card reveal-up">
+        <div class="profile-photo-arch">
+          <img src="assets/images/groom-avatar.jpg" alt="Mohamad Arbian Surya" class="profile-photo-img">
+        </div>
+        <div class="profile-role">Mempelai Pria</div>
+        <h3 class="profile-fullname">Mohamad Arbian Surya</h3>
+        <p class="profile-parents">
+          Putra ke-4 dari Pasangan<br>
+          <strong>Bapak Bambang Hermanto</strong><br>
+          &amp; <strong>Ibu Endang Sri Wahyuni</strong>
+        </p>
+      </div>
+
+      <!-- AMPERSAND CONNECTOR -->
+      <div class="couple-ampersand reveal-zoom">
+        <span>&amp;</span>
+      </div>
+
+      <!-- BRIDE CARD -->
+      <div class="profile-card reveal-up">
+        <div class="profile-photo-arch">
+          <img src="assets/images/bride-avatar.jpg" alt="Himmatul Qoyyimah" class="profile-photo-img">
+        </div>
+        <div class="profile-role">Mempelai Wanita</div>
+        <h3 class="profile-fullname">Himmatul Qoyyimah</h3>
+        <p class="profile-parents">
+          Putri ke-2 dari Pasangan<br>
+          <strong>Bapak Imam Kanafi</strong><br>
+          &amp; <strong>Ibu Aminatun</strong>
+        </p>
+        <a href="https://instagram.com/himatulqyh_" target="_blank" rel="noopener noreferrer" class="btn-instagram">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+          @himatulqyh_
+        </a>
+      </div>
+
+    </section>
+
+    <!-- 4. ACARA & WAKTU (SAVE THE DATE) SECTION -->
+    <section class="section-dark" id="acara">
+      
+      <div class="section-subtitle reveal-up">Save The Date</div>
+      <h2 class="section-title reveal-up">Rangkaian Acara</h2>
+      <div class="section-divider reveal-up">
+        <svg class="divider-icon" viewBox="0 0 24 24">
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.1.8-1.3-4.5-2.7V7z"/>
+        </svg>
+      </div>
+
+      <!-- CARD 1: AKAD NIKAH -->
+      <div class="event-card reveal-up">
+        <div class="event-badge">Akad Nikah</div>
+        <h3 class="event-title">Akad Nikah</h3>
+
+        <div class="event-details-grid">
+          <div class="event-detail-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span><strong>Minggu, 29 November 2026</strong></span>
+          </div>
+
+          <div class="event-detail-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span>Pukul 08.00 WIB s/d Selesai</span>
+          </div>
+        </div>
+
+        <div class="event-location">
+          <strong>Kediaman Mempelai Wanita</strong>
+          Ds. Pulerejo, Kec. Ngantru, Kab. Tulungagung, Jawa Timur
+        </div>
+
+        <div style="margin-top: 18px;">
+          <a href="https://maps.app.goo.gl/2wm3C3V9qRDMbkJR9" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            Buka Google Maps
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD 2: RESEPSI PERNIKAHAN -->
+      <div class="event-card reveal-up">
+        <div class="event-badge">Resepsi</div>
+        <h3 class="event-title">Resepsi Pernikahan</h3>
+
+        <div class="event-details-grid">
+          <div class="event-detail-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span><strong>Minggu, 29 November 2026</strong></span>
+          </div>
+
+          <div class="event-detail-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span>Pukul 09.00 WIB s/d Selesai</span>
+          </div>
+        </div>
+
+        <div class="event-location">
+          <strong>Kediaman Mempelai Wanita</strong>
+          Ds. Pulerejo, Kec. Ngantru, Kab. Tulungagung, Jawa Timur
+        </div>
+
+        <div style="margin-top: 18px;">
+          <a href="https://maps.app.goo.gl/2wm3C3V9qRDMbkJR9" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            Buka Google Maps
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 5. GALERI FOTO (OUR MOMENTS) SECTION -->
+    <section class="section-cream" id="galeri">
+      
+      <div class="section-subtitle reveal-up">Our Gallery</div>
+      <h2 class="section-title reveal-up">Galeri Momen Bahagia</h2>
+      <div class="section-divider reveal-up">
+        <svg class="divider-icon" viewBox="0 0 24 24">
+          <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+        </svg>
+      </div>
+
+      <div class="gallery-grid">
+        <!-- Photo 1: Big landscape highlight -->
+        <div class="gallery-item reveal-zoom">
+          <img src="assets/images/couple-jawa-2.jpg" alt="Arbian &amp; Hima - Busana Jawa Tradisional" loading="lazy">
+          <div class="gallery-overlay-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="11" y1="8" x2="11" y2="14"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Photo 2: Couple 1 -->
+        <div class="gallery-item reveal-zoom">
+          <img src="assets/images/couple-1.jpg" alt="Arbian &amp; Hima - Gaun Pernikahan" loading="lazy">
+          <div class="gallery-overlay-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="11" y1="8" x2="11" y2="14"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Photo 3: Couple 2 -->
+        <div class="gallery-item reveal-zoom">
+          <img src="assets/images/couple-2.jpg" alt="Arbian &amp; Hima - Romantis" loading="lazy">
+          <div class="gallery-overlay-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="11" y1="8" x2="11" y2="14"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Photo 4: Couple 3 -->
+        <div class="gallery-item reveal-zoom">
+          <img src="assets/images/couple-3.jpg" alt="Arbian &amp; Hima - Ceria" loading="lazy">
+          <div class="gallery-overlay-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="11" y1="8" x2="11" y2="14"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Photo 5: Couple Jawa 1 -->
+        <div class="gallery-item reveal-zoom">
+          <img src="assets/images/couple-jawa-1.jpg" alt="Arbian &amp; Hima - Adat Jawa &amp; Payung" loading="lazy">
+          <div class="gallery-overlay-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="11" y1="8" x2="11" y2="14"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 6. WEDDING GIFT / TANDA KASIH SECTION -->
+    <section class="section-dark" id="hadiah">
+      
+      <div class="section-subtitle reveal-up">Wedding Gift</div>
+      <h2 class="section-title reveal-up">Tanda Kasih</h2>
+      <div class="section-divider reveal-up">
+        <svg class="divider-icon" viewBox="0 0 24 24">
+          <path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/>
+        </svg>
+      </div>
+
+      <p class="gift-intro reveal-up">
+        Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless maupun mengirimkan kado fisik:
+      </p>
+
+      <!-- BANK CARD BCA -->
+      <div class="bank-card reveal-up">
+        <div class="bank-card-top">
+          <span class="bank-logo">BCA</span>
+          <div class="chip-icon"></div>
+        </div>
+        <div class="bank-account-number">0482678643</div>
+        <div class="bank-account-holder">a.n. Himmatul Qoyyimah</div>
+        <button class="btn-copy" onclick="copyText('0482678643', 'Nomor rekening BCA berhasil disalin!')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          Salin No. Rekening
+        </button>
+      </div>
+
+      <!-- PHYSICAL GIFT ADDRESS CARD -->
+      <div class="gift-address-card reveal-up">
+        <div class="gift-address-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+          Kirim Kado Fisik
+        </div>
+        <p class="gift-address-text">
+          <strong>Penerima: Himmatul Qoyyimah / Arbian</strong><br>
+          Ds. Pulerejo, Kec. Ngantru, Kab. Tulungagung, Jawa Timur
+        </p>
+        <button class="btn-copy" onclick="copyText('Himmatul Qoyyimah / Arbian, Ds. Pulerejo, Kec. Ngantru, Kab. Tulungagung, Jawa Timur', 'Alamat pengiriman kado berhasil disalin!')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          Salin Alamat
+        </button>
+      </div>
+
+    </section>
+
+    <!-- 7. RSVP & UCAPAN / DOA RESTU SECTION -->
+    <section class="section-cream" id="ucapan">
+      
+      <div class="section-subtitle reveal-up">RSVP &amp; Wishes</div>
+      <h2 class="section-title reveal-up">Ucapan &amp; Doa Restu</h2>
+      <div class="section-divider reveal-up">
+        <svg class="divider-icon" viewBox="0 0 24 24">
+          <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+        </svg>
+      </div>
+
+      <!-- RSVP FORM -->
+      <div class="rsvp-card reveal-up">
+        <form id="rsvpForm">
+          <div class="form-group">
+            <label for="rsvpName" class="form-label">Nama Lengkap</label>
+            <input type="text" id="rsvpName" class="form-input" placeholder="Masukkan nama Anda" required>
+          </div>
+
+          <div class="form-group">
+            <label for="rsvpAttendance" class="form-label">Konfirmasi Kehadiran</label>
+            <select id="rsvpAttendance" class="form-select" required>
+              <option value="" disabled selected>Pilih konfirmasi kehadiran</option>
+              <option value="hadir">Hadir</option>
+              <option value="tidak">Tidak Hadir</option>
+              <option value="ragu">Masih Ragu</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="rsvpGuests" class="form-label">Jumlah Tamu</label>
+            <select id="rsvpGuests" class="form-select">
+              <option value="1">1 Orang</option>
+              <option value="2">2 Orang</option>
+              <option value="3">3 Orang</option>
+              <option value="4">4 Orang atau lebih</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="rsvpMessage" class="form-label">Ucapan &amp; Doa Restu</label>
+            <textarea id="rsvpMessage" class="form-textarea" rows="3" placeholder="Tuliskan ucapan dan doa restu untuk kedua mempelai..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit-rsvp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+            Kirim Konfirmasi &amp; Ucapan
+          </button>
+        </form>
+      </div>
+
+      <!-- WISHES FEED -->
+      <div class="wishes-container">
+        <div class="wishes-header">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-family: var(--font-serif); font-size: 14px; font-weight: 700; color: var(--mahogany);">Doa dari Sahabat &amp; Kerabat</span>
+          </div>
+          <span class="wishes-count" id="wishesCount">Memuat...</span>
+        </div>
+
+        <div class="wishes-feed" id="wishesFeed">
+          <!-- Populated dynamically by JavaScript via db.js -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 8. PENUTUP & KELUARGA BESAR SECTION -->
+    <section class="section-dark" id="penutup" style="padding-bottom: 90px;">
+      
+      <div class="closing-container">
+        
+        <div class="closing-photo-frame reveal-zoom">
+          <img src="assets/images/couple-2.jpg" alt="Mohamad Arbian Surya &amp; Himmatul Qoyyimah" class="closing-photo-img">
+        </div>
+
+        <h2 class="section-title reveal-up" style="font-size: 24px;">Matur Nuwun</h2>
+        <div class="section-divider reveal-up">
+          <svg class="divider-icon" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </div>
+
+        <p class="closing-thanks reveal-up">
+          Merupakan suatu kehormatan dan kebahagiaan bagi kami sekeluarga, apabila Bapak/Ibu/Saudara/i berkenan hadir serta memberikan doa restu kepada kami.
+        </p>
+
+        <div class="closing-sign-names reveal-up">Arbian &amp; Hima</div>
+
+        <div class="family-groups reveal-up">
+          <div>Kami yang berbahagia:</div>
+          <strong>Keluarga Bapak Bambang Hermanto &amp; Ibu Endang Sri Wahyuni</strong>
+          <strong>Keluarga Bapak Imam Kanafi &amp; Ibu Aminatun</strong>
+        </div>
+
+        <div class="footer-credit reveal-up">
+          The Wedding of Mohamad Arbian Surya &amp; Himmatul Qoyyimah<br>
+          © 2026. Made with ❤️
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ==========================================================================
+         STICKY FLOATING CONTROLS
+         ========================================================================== -->
+    <!-- Floating Music Disc Controller -->
+    <div class="music-notes-container" id="musicNotesContainer"></div>
+    <div class="music-controller" id="musicToggle" title="Putar / Jeda Musik">
+      <div class="music-disc rotating" id="musicDisc">
+        <span id="musicIcon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation Dock -->
+    <nav class="bottom-nav hidden" id="bottomNav">
+      <a href="#hero" class="nav-link active">
+        <svg viewBox="0 0 24 24">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span>Sampul</span>
+      </a>
+
+      <a href="#mempelai" class="nav-link">
+        <svg viewBox="0 0 24 24">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+        <span>Mempelai</span>
+      </a>
+
+      <a href="#acara" class="nav-link">
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        <span>Acara</span>
+      </a>
+
+      <a href="#galeri" class="nav-link">
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+          <polyline points="21 15 16 10 5 21"></polyline>
+        </svg>
+        <span>Galeri</span>
+      </a>
+
+      <a href="#hadiah" class="nav-link">
+        <svg viewBox="0 0 24 24">
+          <polyline points="20 12 20 22 4 22 4 12"></polyline>
+          <rect x="2" y="7" width="20" height="5"></rect>
+          <line x1="12" y1="22" x2="12" y2="7"></line>
+          <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+          <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+        </svg>
+        <span>Hadiah</span>
+      </a>
+
+      <a href="#ucapan" class="nav-link">
+        <svg viewBox="0 0 24 24">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span>Ucapan</span>
+      </a>
+    </nav>
+
+  </div>
+
+  <!-- Interactive Lightbox Modal -->
+  <div class="lightbox-modal" id="lightboxModal">
+    <button class="lightbox-close" id="lightboxClose">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev">&#10094;</button>
+    <div class="lightbox-content">
+      <img src="" alt="Enlarged Wedding Photo" class="lightbox-img" id="lightboxImg">
+    </div>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext">&#10095;</button>
+  </div>
+
+  <!-- Toast Notification Box -->
+  <div class="toast-notice" id="toastNotice">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span class="toast-text">Berhasil disalin!</span>
+  </div>
+
+  <!-- Database Layer Engine -->
+  <script src="/assets/js/db.js"></script>
+
+  <!-- JavaScript Engine -->
+  <script src="/assets/js/main.js"></script>
+
+</body>
+</html>

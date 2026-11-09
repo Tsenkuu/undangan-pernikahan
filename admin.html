@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — The Wedding of Arbian &amp; Hima</title>
+
+  <link rel="icon" type="image/jpeg" href="/assets/images/bride-avatar.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --mahogany: #4d151c;
+      --mahogany-dark: #2a0b10;
+      --mahogany-light: #5f1d25;
+      --gold-primary: #d4af37;
+      --gold-light: #f7e7b4;
+      --gold-gradient: linear-gradient(135deg, #f7e7b4 0%, #d4af37 50%, #aa771c 100%);
+      --bg-cream: #faf7f2;
+      --card-bg: #ffffff;
+      --text-dark: #2c2523;
+      --text-muted: #6e6460;
+      --border-color: #e8ded4;
+      --color-hadir: #2e7d32;
+      --bg-hadir: #e8f5e9;
+      --color-tidak: #c62828;
+      --bg-tidak: #ffebee;
+      --color-ragu: #e65100;
+      --bg-ragu: #fff3e0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Bar */
+    .admin-navbar {
+      background: var(--mahogany-dark);
+      color: #ffffff;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--gold-primary);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo {
+      width: 32px;
+      height: 38px;
+    }
+
+    .nav-title {
+      font-family: 'Cinzel', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: 1px;
+    }
+
+    .nav-subtitle {
+      font-size: 11.5px;
+      color: #dfcfc2;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .admin-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: var(--gold-light);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .btn-logout {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-logout:hover {
+      background: rgba(220, 53, 69, 0.8);
+      border-color: #dc3545;
+      color: #ffffff;
+    }
+
+    /* Main Container */
+    .admin-main {
+      flex: 1;
+      max-width: 1180px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 30px 20px 60px;
+    }
+
+    /* Page Header */
+    .page-header {
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .page-title {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      color: var(--mahogany);
+    }
+
+    .page-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Stat Cards Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card.featured {
+      background: linear-gradient(135deg, #4d151c 0%, #2a0b10 100%);
+      color: #ffffff;
+      border-color: var(--gold-primary);
+      box-shadow: 0 6px 20px rgba(77, 21, 28, 0.25);
+    }
+
+    .stat-card.featured .stat-number {
+      color: var(--gold-light);
+    }
+
+    .stat-card.featured .stat-label {
+      color: #dfcfc2;
+    }
+
+    .stat-icon-wrapper {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--gold-primary);
+    }
+
+    .stat-card.featured .stat-icon-wrapper {
+      background: rgba(212, 175, 55, 0.25);
+      color: var(--gold-light);
+    }
+
+    .stat-info {
+      flex: 1;
+    }
+
+    .stat-number {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--text-dark);
+      font-family: 'Cinzel', serif;
+    }
+
+    .stat-label {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .stat-pills {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .mini-pill {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 10px;
+    }
+    .mini-pill.hadir { background: var(--bg-hadir); color: var(--color-hadir); }
+    .mini-pill.tidak { background: var(--bg-tidak); color: var(--color-tidak); }
+    .mini-pill.ragu { background: var(--bg-ragu); color: var(--color-ragu); }
+
+    /* Content Cards */
+    .dashboard-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: #faf6f0;
+    }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--mahogany);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-body {
+      padding: 24px;
+    }
+
+    /* Form Create Guest Invitation */
+    .form-create-guest {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .guest-input {
+      flex: 1;
+      min-width: 260px;
+      padding: 13px 18px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.25s ease;
+      background: #ffffff;
+    }
+
+    .guest-input:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+    }
+
+    .btn-primary {
+      background: var(--gold-gradient);
+      color: var(--mahogany-dark);
+      border: none;
+      border-radius: 10px;
+      padding: 13px 24px;
+      font-size: 13.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(212, 175, 55, 0.5);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Tables */
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 10px;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13.5px;
+    }
+
+    .data-table th {
+      background: #f7f3ed;
+      color: var(--mahogany);
+      font-weight: 700;
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border-color);
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.5px;
+      font-size: 12.5px;
+    }
+
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: middle;
+    }
+
+    .data-table tr:hover td {
+      background-color: #faf8f5;
+    }
+
+    .guest-name-cell {
+      font-weight: 700;
+      color: var(--mahogany);
+      font-size: 14px;
+    }
+
+    .guest-link-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .guest-url-code {
+      background: #f4ede4;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 12px;
+      color: var(--mahogany-dark);
+      border: 1px solid #e2d7c8;
+      max-width: 280px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Status Badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: capitalize;
+    }
+
+    .status-badge.hadir {
+      background: var(--bg-hadir);
+      color: var(--color-hadir);
+      border: 1px solid rgba(46, 125, 50, 0.3);
+    }
+
+    .status-badge.tidak {
+      background: var(--bg-tidak);
+      color: var(--color-tidak);
+      border: 1px solid rgba(198, 40, 40, 0.3);
+    }
+
+    .status-badge.ragu {
+      background: var(--bg-ragu);
+      color: var(--color-ragu);
+      border: 1px solid rgba(230, 81, 0, 0.3);
+    }
+
+    /* Action Buttons in Table */
+    .action-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-action {
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+      border: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-copy {
+      background: #f0f4f8;
+      color: #1976d2;
+      border: 1px solid #d0e1fd;
+    }
+    .btn-copy:hover {
+      background: #1976d2;
+      color: #ffffff;
+    }
+
+    .btn-wa {
+      background: #e8f5e9;
+      color: #2e7d32;
+      border: 1px solid #c8e6c9;
+    }
+    .btn-wa:hover {
+      background: #2e7d32;
+      color: #ffffff;
+    }
+
+    .btn-delete {
+      background: #ffebee;
+      color: #c62828;
+      border: 1px solid #ffcdd2;
+    }
+    .btn-delete:hover {
+      background: #c62828;
+      color: #ffffff;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: var(--mahogany-dark);
+      color: #ffffff;
+      border: 1px solid var(--gold-primary);
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 13.5px;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 35px 20px;
+      color: var(--text-muted);
+      font-size: 13.5px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .admin-navbar {
+        padding: 14px 16px;
+      }
+      .nav-title {
+        font-size: 15px;
+      }
+      .admin-main {
+        padding: 20px 14px 50px;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .data-table th, .data-table td {
+        padding: 10px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="admin-navbar">
+    <div class="nav-brand">
+      <svg class="nav-logo" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5C45 20 30 35 20 50C10 65 5 80 8 100C10 110 25 115 50 115C75 115 90 110 92 100C95 80 90 65 80 50C70 35 55 20 50 5Z" stroke="#d4af37" stroke-width="3" fill="rgba(212, 175, 55, 0.15)"/>
+        <path d="M50 25V105M35 55C40 65 60 65 65 55M30 75C40 85 60 85 70 75M25 95C35 105 65 105 75 95" stroke="#f7e7b4" stroke-width="2"/>
+      </svg>
+      <div>
+        <div class="nav-title">Arbian &amp; Hima Wedding</div>
+        <div class="nav-subtitle">Panel Admin &amp; Buku Tamu</div>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <div class="admin-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        Admin: <strong>imaa</strong>
+      </div>
+      <a href="/api/auth/logout" class="btn-logout" id="btnLogout">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+        Keluar
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="admin-main">
+    
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Ringkasan Undangan &amp; RSVP</h1>
+        <p class="page-desc">Kelola link undangan personal untuk setiap tamu dan pantau konfirmasi kehadiran secara real-time.</p>
+      </div>
+      <a href="/" target="_blank" class="btn-primary" style="font-size: 12.5px; padding: 10px 18px;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+        Buka Website Undangan
+      </a>
+    </div>
+
+    <!-- STATS CARDS -->
+    <div class="stats-grid">
+      <!-- 1. Total Tamu Hadir -->
+      <div class="stat-card featured">
+        <div class="stat-icon-wrapper">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </div>
+        <div class="stat-info">
+          <div class="stat-number" id="statTotalTamuHadir">0</div>
+          <div class="stat-label">Total Tamu Hadir</div>
+          <div class="stat-pills" style="margin-top: 4px;">
+            <span style="font-size: 11px; opacity: 0.9;">Orang terkonfirmasi hadir</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Total Konfirmasi Masuk -->
+      <div class="stat-card">
+        <div class="stat-icon-wrapper">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+        </div>
+        <div class="stat-info">
+          <div class="stat-number" id="statTotalRSVP">0</div>
+          <div class="stat-label">Total Konfirmasi RSVP</div>
+          <div class="stat-pills">
+            <span class="mini-pill hadir" id="pillHadir">0 Hadir</span>
+            <span class="mini-pill tidak" id="pillTidak">0 Tidak</span>
+            <span class="mini-pill ragu" id="pillRagu">0 Ragu</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Undangan Dibuat -->
+      <div class="stat-card">
+        <div class="stat-icon-wrapper">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          </svg>
+        </div>
+        <div class="stat-info">
+          <div class="stat-number" id="statTotalGuests">0</div>
+          <div class="stat-label">Undangan Personal Dibuat</div>
+          <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Link khusus per nama tamu</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FITUR 1: BUAT UNDANGAN PERSONAL -->
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h2 class="card-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="8.5" cy="7" r="4"></circle>
+            <line x1="20" y1="8" x2="20" y2="14"></line>
+            <line x1="23" y1="11" x2="17" y2="11"></line>
+          </svg>
+          Buat Link Undangan Khusus Tamu
+        </h2>
+        <span style="font-size: 12.5px; color: var(--text-muted);">Nama tamu otomatis muncul di sampul &amp; form RSVP</span>
+      </div>
+      <div class="card-body">
+        <form id="createGuestForm" class="form-create-guest">
+          <input type="text" id="guestNameInput" class="guest-input" placeholder="Masukkan nama tamu (contoh: Andi Pratama, Bapak Joko Sekeluarga)" required>
+          <button type="submit" class="btn-primary" id="btnCreateGuest">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Buat Undangan
+          </button>
+        </form>
+
+        <!-- Tabel Daftar Undangan Personal -->
+        <div class="table-responsive" style="margin-top: 24px;">
+          <table class="data-table" id="guestsTable">
+            <thead>
+              <tr>
+                <th style="width: 50px;">No</th>
+                <th>Nama Tamu</th>
+                <th>Link Undangan Personal</th>
+                <th style="text-align: right; width: 230px;">Aksi Cepat</th>
+              </tr>
+            </thead>
+            <tbody id="guestsTableBody">
+              <tr>
+                <td colspan="4" class="empty-state">Memuat daftar undangan...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- FITUR 2: DAFTAR KONFIRMASI KEHADIRAN (RSVP) -->
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h2 class="card-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          Daftar Konfirmasi Kehadiran &amp; Ucapan Tamu (RSVP)
+        </h2>
+        <span id="rsvpSummaryLabel" style="font-size: 12.5px; font-weight: 600; color: var(--mahogany);">0 Konfirmasi</span>
+      </div>
+      <div class="card-body" style="padding-top: 10px;">
+        <div class="table-responsive">
+          <table class="data-table" id="rsvpsTable">
+            <thead>
+              <tr>
+                <th style="width: 50px;">No</th>
+                <th>Nama Tamu</th>
+                <th>Konfirmasi</th>
+                <th>Jumlah Tamu</th>
+                <th>Ucapan &amp; Doa Restu</th>
+                <th>Waktu</th>
+                <th style="width: 60px; text-align: center;">Hapus</th>
+              </tr>
+            </thead>
+            <tbody id="rsvpsTableBody">
+              <tr>
+                <td colspan="7" class="empty-state">Memuat data RSVP...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Toast Notification Box -->
+  <div class="toast" id="adminToast">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2.5">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span id="toastMessage">Berhasil!</span>
+  </div>
+
+  <script>
+    // Utility Toast
+    let toastTimer = null;
+    function showToast(msg) {
+      const toast = document.getElementById('adminToast');
+      const text = document.getElementById('toastMessage');
+      if (!toast) return;
+      text.textContent = msg;
+      toast.classList.add('show');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    function copyToClipboard(text, successMsg) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(successMsg || 'Link berhasil disalin ke clipboard!');
+        }).catch(() => fallbackCopy(text, successMsg));
+      } else {
+        fallbackCopy(text, successMsg);
+      }
+    }
+
+    function fallbackCopy(text, successMsg) {
+      const temp = document.createElement('textarea');
+      temp.value = text;
+      temp.style.position = 'fixed';
+      temp.style.opacity = '0';
+      document.body.appendChild(temp);
+      temp.focus();
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+      showToast(successMsg || 'Link berhasil disalin ke clipboard!');
+    }
+
+    // Load Stats
+    async function loadStats() {
+      try {
+        const res = await fetch('/api/admin/stats');
+        if (res.ok) {
+          const json = await res.json();
+          const d = json.data || {};
+          document.getElementById('statTotalTamuHadir').textContent = d.totalTamuHadir || 0;
+          document.getElementById('statTotalRSVP').textContent = d.total || 0;
+          document.getElementById('pillHadir').textContent = `${d.hadir || 0} Hadir`;
+          document.getElementById('pillTidak').textContent = `${d.tidak || 0} Tidak`;
+          document.getElementById('pillRagu').textContent = `${d.ragu || 0} Ragu`;
+          document.getElementById('statTotalGuests').textContent = d.totalGuestsCreated || 0;
+          document.getElementById('rsvpSummaryLabel').textContent = `${d.total || 0} Konfirmasi Masuk`;
+        }
+      } catch (e) {
+        console.error('Error load stats:', e);
+      }
+    }
+
+    // Load Guests List
+    async function loadGuests() {
+      const tbody = document.getElementById('guestsTableBody');
+      try {
+        const res = await fetch('/api/admin/guests');
+        if (res.ok) {
+          const json = await res.json();
+          const guests = json.data || [];
+          if (guests.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Belum ada undangan personal yang dibuat. Masukkan nama tamu di atas untuk membuat link!</td></tr>`;
+            return;
+          }
+
+          const origin = window.location.origin;
+          tbody.innerHTML = '';
+          guests.forEach((g, idx) => {
+            const guestLink = `${origin}/undangan/${g.slug}`;
+            const waMessage = encodeURIComponent(
+              `Kepada Yth. Bapak/Ibu/Saudara/i *${g.name}*,\n\n` +
+              `Tanpa mengurangi rasa hormat, perkenankan kami mengundang Anda untuk menghadiri acara pernikahan kami:\n\n` +
+              `💍 *Mohamad Arbian Surya & Himmatul Qoyyimah*\n` +
+              `🗓️ Minggu, 29 November 2026\n\n` +
+              `Informasi lengkap dan konfirmasi kehadiran dapat dilihat melalui tautan undangan resmi berikut:\n` +
+              `${guestLink}\n\n` +
+              `Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir dan memberikan doa restu.\n\n` +
+              `Terima kasih.`
+            );
+            const waUrl = `https://api.whatsapp.com/send?text=${waMessage}`;
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td style="color: var(--text-muted);">${idx + 1}</td>
+              <td><span class="guest-name-cell">${escapeHtml(g.name)}</span></td>
+              <td>
+                <div class="guest-link-box">
+                  <a href="${guestLink}" target="_blank" class="guest-url-code" title="${guestLink}">${guestLink}</a>
+                </div>
+              </td>
+              <td>
+                <div class="action-group" style="justify-content: flex-end;">
+                  <button class="btn-action btn-copy" onclick="copyToClipboard('${guestLink}', 'Link untuk ${escapeJs(g.name)} disalin!')">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    Salin
+                  </button>
+                  <a href="${waUrl}" target="_blank" class="btn-action btn-wa">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
+                    </svg>
+                    WhatsApp
+                  </a>
+                  <button class="btn-action btn-delete" onclick="deleteGuest(${g.id}, '${escapeJs(g.name)}')">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="3 6 5 6 21 6"></polyline>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                  </button>
+                </div>
+              </td>
+            `;
+            tbody.appendChild(tr);
+          });
+        }
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Gagal memuat data tamu undangan.</td></tr>`;
+      }
+    }
+
+    // Load RSVPs List
+    async function loadRSVPs() {
+      const tbody = document.getElementById('rsvpsTableBody');
+      try {
+        const res = await fetch('/api/admin/rsvps');
+        if (res.ok) {
+          const json = await res.json();
+          const rsvps = json.data || [];
+          if (rsvps.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" class="empty-state">Belum ada konfirmasi kehadiran (RSVP) yang masuk.</td></tr>`;
+            return;
+          }
+
+          tbody.innerHTML = '';
+          rsvps.forEach((r, idx) => {
+            let badgeClass = 'hadir';
+            let badgeLabel = 'Hadir';
+            if (r.attendance === 'tidak') {
+              badgeClass = 'tidak';
+              badgeLabel = 'Tidak Hadir';
+            } else if (r.attendance === 'ragu') {
+              badgeClass = 'ragu';
+              badgeLabel = 'Masih Ragu';
+            }
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td style="color: var(--text-muted);">${idx + 1}</td>
+              <td><span class="guest-name-cell">${escapeHtml(r.name)}</span></td>
+              <td><span class="status-badge ${badgeClass}">${badgeLabel}</span></td>
+              <td><strong>${r.guests_count || 1} Orang</strong></td>
+              <td style="max-width: 320px; line-height: 1.5; color: #4a3e3d;">${escapeHtml(r.message || '-')}</td>
+              <td style="font-size: 12px; color: var(--text-muted); white-space: nowrap;">${escapeHtml(r.time || 'Baru saja')}</td>
+              <td style="text-align: center;">
+                <button class="btn-action btn-delete" title="Hapus ucapan" onclick="deleteRSVP(${r.id})">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                  </svg>
+                </button>
+              </td>
+            `;
+            tbody.appendChild(tr);
+          });
+        }
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="7" class="empty-state">Gagal memuat data RSVP.</td></tr>`;
+      }
+    }
+
+    // Create Guest Handler
+    const guestForm = document.getElementById('createGuestForm');
+    const guestInput = document.getElementById('guestNameInput');
+    const btnCreate = document.getElementById('btnCreateGuest');
+
+    guestForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = guestInput.value.trim();
+      if (!name) return;
+
+      btnCreate.disabled = true;
+      btnCreate.textContent = 'Membuat...';
+
+      try {
+        const res = await fetch('/api/admin/guests', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name })
+        });
+
+        const json = await res.json();
+        if (res.ok && json.success) {
+          guestInput.value = '';
+          showToast(`Link undangan untuk "${name}" berhasil dibuat!`);
+          await loadGuests();
+          await loadStats();
+        } else {
+          showToast(json.error || 'Gagal membuat link undangan');
+        }
+      } catch (err) {
+        showToast('Terjadi kesalahan server');
+      } finally {
+        btnCreate.disabled = false;
+        btnCreate.innerHTML = `
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Buat Undangan
+        `;
+      }
+    });
+
+    // Delete Guest
+    async function deleteGuest(id, name) {
+      if (!confirm(`Hapus link undangan personal untuk "${name}"?`)) return;
+      try {
+        const res = await fetch(`/api/admin/guests/${id}`, { method: 'DELETE' });
+        if (res.ok) {
+          showToast('Undangan berhasil dihapus');
+          await loadGuests();
+          await loadStats();
+        }
+      } catch (e) {
+        showToast('Gagal menghapus');
+      }
+    }
+
+    // Delete RSVP
+    async function deleteRSVP(id) {
+      if (!confirm('Hapus konfirmasi kehadiran ini?')) return;
+      try {
+        const res = await fetch(`/api/admin/rsvps/${id}`, { method: 'DELETE' });
+        if (res.ok) {
+          showToast('Data RSVP dihapus');
+          await loadRSVPs();
+          await loadStats();
+        }
+      } catch (e) {
+        showToast('Gagal menghapus');
+      }
+    }
+
+    // Helpers
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function escapeJs(str) {
+      if (!str) return '';
+      return String(str).replace(/'/g, "\\'").replace(/"/g, '\\"');
+    }
+
+    // Initial Load
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStats();
+      loadGuests();
+      loadRSVPs();
+    });
+  </script>
+
+</body>
+</html>
