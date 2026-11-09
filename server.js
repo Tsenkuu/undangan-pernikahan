@@ -312,10 +312,31 @@ const server = http.createServer(async (req, res) => {
     if (fs.existsSync(indexFilePath)) {
       let html = fs.readFileSync(indexFilePath, 'utf-8');
 
+      const protocol = req.headers['x-forwarded-proto'] || (req.socket.encrypted ? 'https' : 'http');
+      const origin = `${protocol}://${host}`;
+
       // Pastikan ada <base href="/"> agar seluruh file asset (css, js, gambar)
       // dimuat dengan benar dari root domain pada URL /undangan/:slug
       if (!html.includes('<base href=')) {
         html = html.replace('<head>', '<head>\n  <base href="/">');
+      }
+
+      // Pastikan og:image & twitter:image menjadi URL absolut lengkap agar crawler WhatsApp / medsos memunculkan foto
+      html = html.replace(
+        /content="\/assets\/images\/preview-share\.jpg"/g,
+        `content="${origin}/assets/images/preview-share.jpg"`
+      );
+
+      // Personalisasi deskripsi Open Graph untuk tamu
+      if (guestName && guestName !== 'Tamu Undangan') {
+        html = html.replace(
+          /<meta property="og:description" content="[^"]*">/,
+          `<meta property="og:description" content="Kepada Yth. ${escapeHtml(guestName)}, buka undangan untuk melihat detail acara pernikahan Arbian &amp; Hima.">`
+        );
+        html = html.replace(
+          /<meta name="twitter:description" content="[^"]*">/,
+          `<meta name="twitter:description" content="Kepada Yth. ${escapeHtml(guestName)}, buka undangan untuk melihat detail acara pernikahan Arbian &amp; Hima.">`
+        );
       }
 
       // Inject nama tamu langsung ke Server-Side Rendered HTML
@@ -334,6 +355,21 @@ const server = http.createServer(async (req, res) => {
         `<input type="text" id="rsvpName" class="form-input" placeholder="Masukkan nama Anda" value="${escapeHtml(guestName)}" required>`
       );
 
+      return sendHtml(res, 200, html);
+    }
+  }
+
+  // Route Root (/) dengan Open Graph absolut
+  if (pathname === '/' && method === 'GET') {
+    const indexFilePath = path.join(__dirname, 'index.html');
+    if (fs.existsSync(indexFilePath)) {
+      let html = fs.readFileSync(indexFilePath, 'utf-8');
+      const protocol = req.headers['x-forwarded-proto'] || (req.socket.encrypted ? 'https' : 'http');
+      const origin = `${protocol}://${host}`;
+      html = html.replace(
+        /content="\/assets\/images\/preview-share\.jpg"/g,
+        `content="${origin}/assets/images/preview-share.jpg"`
+      );
       return sendHtml(res, 200, html);
     }
   }
